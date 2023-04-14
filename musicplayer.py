@@ -1,13 +1,10 @@
-# Importing all the necessary modules
 from tkinter import *
 from tkinter import filedialog
-import pygame.mixer as mixer        # pip install pygame
+import pygame.mixer as mixer        
 import os
 
-# Initializing the mixer
 mixer.init()
 
-# Play, Stop, Load and Pause & Resume functions
 def play_song(song_name: StringVar, songs_list: Listbox, status: StringVar):
     song_name.set(songs_list.get(ACTIVE))
 
@@ -41,13 +38,11 @@ def resume_song(status: StringVar):
     status.set("Song RESUMED")
 
 
-# Creating the master GUI
 root = Tk()
 root.geometry('700x220')     #
 root.title('PythonGeeks Music Player')
 root.resizable(0, 0)
 
-# All the frames
 song_frame = LabelFrame(root, text='Current Song', bg='LightBlue', width=400, height=80)
 song_frame.place(x=0, y=0)
 
@@ -57,12 +52,10 @@ button_frame.place(y=80)
 listbox_frame = LabelFrame(root, text='Playlist', bg='RoyalBlue')
 listbox_frame.place(x=400, y=0, height=200, width=300)
 
-# All StringVar variables
 current_song = StringVar(root, value='<Not selected>')
 
 song_status = StringVar(root, value='<Not Available>')
 
-# Playlist ListBox
 playlist = Listbox(listbox_frame, font=('Helvetica', 11), selectbackground='Gold')
 
 scroll_bar = Scrollbar(listbox_frame, orient=VERTICAL)
@@ -74,13 +67,11 @@ scroll_bar.config(command=playlist.yview)
 
 playlist.pack(fill=BOTH, padx=5, pady=5)
 
-# SongFrame Labels
 Label(song_frame, text='CURRENTLY PLAYING:', bg='LightBlue', font=('Times', 10, 'bold')).place(x=5, y=20)
 
 song_lbl = Label(song_frame, textvariable=current_song, bg='Goldenrod', font=("Times", 12), width=25)
 song_lbl.place(x=150, y=20)
 
-# Buttons in the main screen
 pause_btn = Button(button_frame, text='Pause', bg='Aqua', font=("Georgia", 13), width=7,
                     command=lambda: pause_song(song_status))
 pause_btn.place(x=15, y=10)
@@ -101,9 +92,7 @@ load_btn = Button(button_frame, text='Load Directory', bg='Aqua', font=("Georgia
                   command=lambda: load(playlist))
 load_btn.place(x=10, y=55)
 
-# Label at the bottom that displays the state of the music
 Label(root, textvariable=song_status, bg='SteelBlue', font=('Times', 9), justify=LEFT).pack(side=BOTTOM, fill=X)
 
-# Finalizing the GUI
 root.update()
 root.mainloop()
